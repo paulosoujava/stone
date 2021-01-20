@@ -5,5 +5,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface ICalculate {
-	public  Map<String,BigDecimal>  calculate( List<Item> itens,List<Email> emails);
+	public  Map<String,BigDecimal>  calculate( List<Item> items,List<Email> emails);
 }

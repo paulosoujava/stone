@@ -11,28 +11,29 @@ public class Calculate implements ICalculate {
 	private float totalItemsValue;
 	private Double finalValue = 0.0;
 	private Map<String, BigDecimal> toPay = new HashMap<String, BigDecimal>();
+	List<Item> items;
+	List<Email> emails;
 
 	@Override
-	public Map<String, BigDecimal> calculate(List<Item> itens, List<Email> emails) {
-
+	public Map<String, BigDecimal> calculate(List<Item> items, List<Email> emails) {
+		this.items = items;
+		this.emails = emails;
 		
-		calculateTotalItems(itens);
-		dividByEmail( emails);
-		 
-		System.out.println("Total da Conta: R$: " + totalItemsValue);
+		calculateTotalItems();
+		dividByEmail();
+	
 		return toPay;
 
 	}
 
-	private void calculateTotalItems(List<Item> itens) {
-
-		for (int i = 0; i < itens.size(); i++) {
-			totalItemsValue += (itens.get(i).getQtd() * itens.get(i).getPrice());
+	private void calculateTotalItems() {
+		for (int i = 0; i < items.size(); i++) {
+			totalItemsValue += (items.get(i).getQtd() * items.get(i).getPrice());
 		}
 	
 	}
 
-	private void dividByEmail(List<Email> emails) {
+	private void dividByEmail() {
 	    for (int i = 0; i < emails.size(); i++) {
 	    	calculateCentavos(emails.get(i).getEmail(),  emails.size(), (i == (emails.size()-1)) );	
 		}
@@ -42,8 +43,8 @@ public class Calculate implements ICalculate {
 	
 	private void calculateCentavos(String email, int size, boolean isLast) {
 		BigDecimal total = new BigDecimal((totalItemsValue / size )).setScale(2, RoundingMode.HALF_EVEN);
-		
 		finalValue += total.doubleValue();
+		
 		if(isLast) {
 			if(finalValue %size == 0) {
 				toPay.put(email , total );
