@@ -34,13 +34,13 @@ public class Calculate implements ICalculate {
 
 	private void dividByEmail(List<Email> emails) {
 	    for (int i = 0; i < emails.size(); i++) {
-	    	putInMapEmailAndValue(emails.get(i).getEmail(),  emails.size(), (i == (emails.size()-1)) );	
+	    	calculateCentavos(emails.get(i).getEmail(),  emails.size(), (i == (emails.size()-1)) );	
 		}
 	}
 	
 
 	
-	private void putInMapEmailAndValue(String email, int size, boolean isLast) {
+	private void calculateCentavos(String email, int size, boolean isLast) {
 		BigDecimal total = new BigDecimal((totalItemsValue / size )).setScale(2, RoundingMode.HALF_EVEN);
 		
 		finalValue += total.doubleValue();
