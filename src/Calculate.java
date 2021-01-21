@@ -18,17 +18,17 @@ public class Calculate implements ICalculate {
 	public Map<String, BigDecimal> calculate(List<Item> items, List<Email> emails) {
 		this.items = items;
 		this.emails = emails;
-		
-		if(validateEmail()) {
+
+		if (validateEmail()) {
 			calculateTotalItems();
 			dividByEmail();
 		}
-	
+
 		return toPay;
 
 	}
-	
-	private boolean  validateEmail() {
+
+	private boolean validateEmail() {
 		System.err.println("Ops nobody has money");
 		return emails.size() >= 1;
 	}
@@ -37,33 +37,31 @@ public class Calculate implements ICalculate {
 		for (int i = 0; i < items.size(); i++) {
 			totalItemsValue += (items.get(i).getQtd() * items.get(i).getPrice());
 		}
-	
+
 	}
 
 	private void dividByEmail() {
-	    for (int i = 0; i < emails.size(); i++) {
-	    	calculateCentavos(emails.get(i).getEmail(),  emails.size(), (i == (emails.size()-1)) );	
+		for (int i = 0; i < emails.size(); i++) {
+			calculateCentavos(emails.get(i).getEmail(), emails.size(), (i == (emails.size() - 1)));
 		}
 	}
-	
 
-	
 	private void calculateCentavos(String email, int size, boolean isLast) {
-		BigDecimal total = new BigDecimal((totalItemsValue / size )).setScale(2, RoundingMode.HALF_EVEN);
+		BigDecimal total = new BigDecimal((totalItemsValue / size)).setScale(2, RoundingMode.HALF_EVEN);
 		finalValue += total.doubleValue();
-		
-		if(isLast) {
-			if(finalValue %size == 0) {
-				toPay.put(email , total );
-			}else {
-				addOrsubtrac(( totalItemsValue >= 11 ),total, email);
+
+		if (isLast) {
+			if (finalValue % size == 0) {
+				toPay.put(email, total);
+			} else {
+				addOrsubtrac((totalItemsValue >= 11), total, email);
 			}
-		}else {
-			toPay.put(email , total );
+		} else {
+			toPay.put(email, total);
 		}
-		
 
 	}
+
 	public void addOrsubtrac(boolean isAdd, BigDecimal total, String email) {
 		BigDecimal centavos = new BigDecimal(0.01).setScale(2, RoundingMode.HALF_EVEN);
 
