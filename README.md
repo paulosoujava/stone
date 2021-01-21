@@ -1,6 +1,9 @@
 
 # Imagine uma lista de compras. Ela possui:
--
+
+- RESPOSTA EM TYPESCRIPT : 
+https://github.com/paulosoujava/stone_ts
+
 ## Itens
 Quantidade de cada item
 Preço por unidade/peso/pacote de cada item
