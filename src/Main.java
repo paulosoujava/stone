@@ -12,9 +12,9 @@ public class Main {
 	    List<Email> emails = new ArrayList<Email>();
 	    Calculate calculate = new Calculate();
 	    
-	    emails.add(new Email("user_1@gmail.com"));
-	    emails.add(new Email("user_2@gmail.com"));
-	    emails.add(new Email("user_3@gmail.com"));
+//	    emails.add(new Email("user_1@gmail.com"));
+//	    emails.add(new Email("user_2@gmail.com"));
+//	    emails.add(new Email("user_3@gmail.com"));
 	    items.add(new Item(1, 1.00, "Hamburger"));
 	    
 	    Map<String, BigDecimal> resultado = calculate.calculate(items, emails);

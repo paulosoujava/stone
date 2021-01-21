@@ -19,11 +19,18 @@ public class Calculate implements ICalculate {
 		this.items = items;
 		this.emails = emails;
 		
-		calculateTotalItems();
-		dividByEmail();
+		if(validateEmail()) {
+			calculateTotalItems();
+			dividByEmail();
+		}
 	
 		return toPay;
 
+	}
+	
+	private boolean  validateEmail() {
+		System.err.println("Ops nobody has money");
+		return emails.size() >= 1;
 	}
 
 	private void calculateTotalItems() {
